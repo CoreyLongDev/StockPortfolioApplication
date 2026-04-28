@@ -1,3 +1,4 @@
+// IMPORTS
 import java.util.*;
 
 /**
@@ -7,16 +8,16 @@ import java.util.*;
  * Date: Apr 27, 2028
  */
 
-// IMPORTS
-
 
 // START MAIN CLASS
 public class PortfolioManager {
 
     private ArrayList<TransactionHistory> portfolioList = new ArrayList<>();
     public static void main(String[] args) {
+        
         Scanner scnr = new Scanner(System.in);
         int userChoice = -1;
+
         // MENU SYSTEM
         do { 
             System.out.println("Corey Long Brokerage Account");
@@ -31,10 +32,29 @@ public class PortfolioManager {
 
             if (scnr.hasNextInt()) {
                 userChoice = scnr.nextInt();
-                if (userChoice < 0 || userChoice > 6) {
-                System.out.print("Invalid Selection, Please choose an option (0 to 6) : ");
-                scnr.nextInt();
-                }
+
+            switch (userChoice) {
+                case 1:
+                    // deposit
+                    break;
+                case 2:
+                    // withdraw 
+                    break;
+                case 3:
+                    // buy stock
+                    break;
+                case 4:
+                    // sell stock
+                    break;
+                case 5:
+                    // display transaction history
+                    break;
+                case 6:
+                    // display portfolio
+                    break;
+                default:
+                    System.out.print("Invalid Selection, Please choose an option (0 to 6) : ");
+            }
             } 
         } while (userChoice != 0);
 
