@@ -31,11 +31,11 @@ public class PortfolioManager {
 
             if (scnr.hasNextInt()) {
                 userChoice = scnr.nextInt();
-            } else {
-                System.out.println("Invalid Selection. Please try again with an option (0 to 6)");
+                if (userChoice < 0 || userChoice > 6) {
+                System.out.print("Invalid Selection, Please choose an option (0 to 6) : ");
                 scnr.nextInt();
-                continue;
-            }
+                }
+            } 
         } while (userChoice != 0);
 
         scnr.close();
