@@ -1,20 +1,16 @@
+// Author: Corey Long
+// Date: Apr 27, 2026
+
+
 // IMPORTS
 import java.util.*;
-
-/**
- * PortfolioManager.java
- * Main class for the program. manages transactions in the stock portfolio. 
- * Author: Corey Long
- * Date: Apr 27, 2028
- */
-
 
 // START MAIN CLASS
 public class PortfolioManager {
 
     private ArrayList<TransactionHistory> portfolioList = new ArrayList<>();
     public static void main(String[] args) {
-        
+
         Scanner scnr = new Scanner(System.in);
         int userChoice = -1;
 
@@ -30,32 +26,51 @@ public class PortfolioManager {
             System.out.println("6 - Display Portfolio");
             System.out.print("Enter option (0 to 6) : ");
 
-            if (scnr.hasNextInt()) {
-                userChoice = scnr.nextInt();
+            try {
+                userChoice = Integer.parseInt(scnr.nextLine().trim());
 
-            switch (userChoice) {
-                case 1:
-                    // deposit
-                    break;
-                case 2:
-                    // withdraw 
-                    break;
-                case 3:
-                    // buy stock
-                    break;
-                case 4:
-                    // sell stock
-                    break;
-                case 5:
-                    // display transaction history
-                    break;
-                case 6:
-                    // display portfolio
-                    break;
-                default:
-                    System.out.print("Invalid Selection, Please choose an option (0 to 6) : ");
+                switch (userChoice) {
+                    case 1:
+                        System.out.println("");
+                        System.out.println(" - choice One has been made.");
+                        System.out.println("");
+                        break;
+                    case 2:
+                        System.out.println("");
+                        System.out.println(" - choice Two has been made.");
+                        System.out.println("");
+                        break;
+                    case 3:
+                        System.out.println("");
+                        System.out.println(" - choice Three has been made.");
+                        System.out.println("");
+                        break;
+                    case 4:
+                        System.out.println("");
+                        System.out.println(" - choice Four has been made.");
+                        System.out.println("");
+                        break;
+                    case 5:
+                        System.out.println("");
+                        System.out.println(" - choice Five has been made.");
+                        System.out.println("");
+                        break;
+                    case 6:
+                        System.out.println("");
+                        System.out.println(" - choice Six has been made.");
+                        System.out.println("");
+                        break;
+                    default:
+                        System.out.println("");
+                        System.out.print(" - Invalid Selection, Please choose an option (0 to 6) : ");
+                        System.out.println("");
+                } 
+            } catch (NumberFormatException e) {
+                    System.out.println("");
+                    System.out.print(" - Invalid Selection, Please Try Again.");
+                    System.out.println("");
+                    System.out.println("");
             }
-            } 
         } while (userChoice != 0);
 
         scnr.close();
