@@ -9,6 +9,7 @@ import java.util.*;
 public class PortfolioManager {
 
     private static ArrayList<TransactionHistory> portfolioList = new ArrayList<>();
+    static ArrayList<String> TickerCollector = new ArrayList<>();
 
     private static double getCashBalance() {
         double balance = 0.00;
@@ -205,9 +206,19 @@ public class PortfolioManager {
 
                     // PRINT PORTFOLIO
                     case 6:
-                        System.out.println("");
-                        System.out.println(" - choice Six has been made.");
-                        System.out.println("");
+                        // ADD TIME FOR BEHIND JAVA DATE
+                        java.time.LocalDateTime time = java.time.LocalDateTime.now();
+
+                        for (TransactionHistory t : portfolioList) {
+                            if (!TickerCollector.contains(t.getTicker())) {
+                                TickerCollector.add(t.getTicker());
+                            }     
+                        }
+
+                        for (String ticker : TickerCollector) {
+                            System.out.println(time + ticker + getStockShare(ticker));
+                        }
+
                         break;
 
                     default:
