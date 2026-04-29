@@ -84,8 +84,11 @@ public class PortfolioManager {
 
                     case 5:
                         System.out.println("");
-                        System.out.println(" - choice Five has been made.");
-                        System.out.println("");
+                        System.out.println("Date\t\tTicker\tQuantity\tCost Basis\tTrans Type");
+                        System.out.println("===================================================================");
+                        for (TransactionHistory t : portfolioList) {
+                            System.out.println("\n" + t.getTransDate() + "\t" + t.getTicker() + "\t " + t.getQty() + "\t\t" + t.getCostBasis() + "\t\t" + t.getTransType());
+                        }
                         break;
 
                     case 6:
