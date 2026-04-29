@@ -9,4 +9,20 @@ public class TransactionHistory {
     private String transType;
     private double qty;
     private double costBasis;
+
+    public TransactionHistory(String ticker, String transDate, String transType, double qty, double costBasis) {
+        this.ticker = ticker;
+        this.transDate = transDate;
+        this.transType = transType;
+        this.qty = qty;
+        this.costBasis = costBasis;
+    }
+
+    public String getTicker() {
+        return ticker;
+    }
+
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
+    }
 }

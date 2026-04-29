@@ -37,8 +37,7 @@ public class PortfolioManager {
                 switch (userChoice) {
                     case 1:
                         System.out.println("");
-                        System.out.println(" - Enter deposit amount: ");
-                        System.out.println("");
+                        System.out.print(" - Enter deposit amount: ");
                         double depositAmount = Double.parseDouble(scnr.nextLine());
 
                         TransactionHistory deposit = new TransactionHistory(
@@ -50,13 +49,14 @@ public class PortfolioManager {
                         );
                         portfolioList.add(deposit);
                         System.out.println("SUCCESS!");
-                        System.out.println(depositAmount + "has been deposited into your account.");
+                        System.out.println(depositAmount + " has been deposited into your account.\n");
+
                         break;
 
                     case 2:
                         System.out.println("");
-                        System.out.println(" - choice Two has been made.");
-                        System.out.println("");
+                        System.out.print(" - choice Two has been made.");
+                        
                         break;
 
                     case 3:
