@@ -20,15 +20,30 @@ public class PortfolioManager {
         return balance;
     }
 
+    private static double getStockShare(String ticker) {
+        double shares = 0.00;
+        for (TransactionHistory t : portfolioList) {
+            if (t.getTicker().equals(ticker)) {
+                shares += t.getQty();
+            }
+        }
+        return shares;
+    }
+
     private static String getCurrentDate() {
         java.time.LocalDate today = java.time.LocalDate.now();
         return today.getMonthValue() + "/" + today.getDayOfMonth() + "/" + today.getYear();
     }
+
     public static void main(String[] args) {
 
         Scanner scnr = new Scanner(System.in);
         int userChoice = -1;
         double cashBalance;
+        double shareBalance;
+        String userTicker;
+        double userQty;
+        double userSharePrice;
 
         // MENU SYSTEM
         do { 
@@ -64,6 +79,7 @@ public class PortfolioManager {
                         System.out.println(depositAmount + " has been deposited into your account.\n");
 
                         break;
+
                     // WITHDRAW
                     case 2:
                         System.out.println("");
@@ -89,14 +105,15 @@ public class PortfolioManager {
                         System.out.println("SUCCESS!");
                         System.out.println(withdrawAmount + " has been withdrawn from your account.\n");
                         break;
+
                     // STOCK - BUY
                     case 3:
                         System.out.print(" - Enter the Stock Ticker: ");
-                        String userTicker = scnr.nextLine().toUpperCase();
+                        userTicker = scnr.nextLine().toUpperCase();
                         System.out.print(" - Enter the Quantity: ");
-                        double userQty = Double.parseDouble(scnr.nextLine());
+                        userQty = Double.parseDouble(scnr.nextLine());
                         System.out.print(" - Enter price per share: ");
-                        double userSharePrice = Double.parseDouble(scnr.nextLine());
+                        userSharePrice = Double.parseDouble(scnr.nextLine());
                         System.out.println("");
                         double totalCost = userQty * userSharePrice;
                         cashBalance = getCashBalance();
@@ -135,9 +152,45 @@ public class PortfolioManager {
 
                     // STOCK - SELL
                     case 4:
+                        System.out.print(" - Which stock would you like to sell? (Enter Ticker): ");
+                        userTicker = scnr.nextLine().toUpperCase();
+                        System.out.print(" - Quantity to sell: ");
+                        userQty = Double.parseDouble(scnr.nextLine());
+                        System.out.print(" - Enter value per share: ");
+                        userSharePrice = Double.parseDouble(scnr.nextLine());
                         System.out.println("");
-                        System.out.println(" - choice Four has been made.");
-                        System.out.println("");
+                        double totalSale = userQty * userSharePrice;
+                        shareBalance = getStockShare(userTicker);
+                        
+                        // CHECK SHARE AVAILABILITY
+                        if (shareBalance < userQty) {
+                            System.out.println("ERROR: Insufficient shares to complete this transaction.");
+                            System.out.println("Transaction cancelled.\n");
+                            break;
+                        }
+
+                        // SELL STOCK
+                        TransactionHistory stockOut = new TransactionHistory(
+                            userTicker,
+                            getCurrentDate(),
+                            "SELL",
+                            -userQty,
+                            userSharePrice
+                        );
+
+                        portfolioList.add(stockOut);
+                        TransactionHistory cashIn = new TransactionHistory(
+                            "CASH",
+                            getCurrentDate(),
+                            "DEPOSIT",
+                            totalSale,
+                            1.00
+                        );
+                        portfolioList.add(cashIn);
+                        System.out.println("SUCCESS!");
+                        System.out.println(userQty + " shares of " + userTicker + " have been sold at $" + userSharePrice + " per share.\n");
+                        System.out.println("Total value of this transaction: $" + totalSale + "\n");
+
                         break;
 
                     // PRINT TRANSACTION HISTORY
