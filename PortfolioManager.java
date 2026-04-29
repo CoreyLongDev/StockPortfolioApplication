@@ -72,9 +72,15 @@ public class PortfolioManager {
                         break;
                     // STOCK - BUY
                     case 3:
+                        System.out.print(" - Enter the Stock Ticker: ");
+                        String userTicker = scnr.nextLine().toUpperCase();
+                        System.out.print(" - Enter the Quantity: ");
+                        double userQty = Double.parseDouble(scnr.nextLine());
+                        System.out.print(" - Enter price per share: ");
+                        double userSharePrice = Double.parseDouble(scnr.nextLine());
                         System.out.println("");
-                        System.out.print("");
-
+                        System.out.print(userTicker + " | " + userQty + " | " + userSharePrice + "\n");
+                        System.out.println("");
                         break;
 
                     // STOCK - SELL
