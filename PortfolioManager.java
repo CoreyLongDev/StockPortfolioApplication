@@ -35,6 +35,7 @@ public class PortfolioManager {
                 userChoice = Integer.parseInt(scnr.nextLine().trim());
 
                 switch (userChoice) {
+                    // DEPOSIT
                     case 1:
                         System.out.println("");
                         System.out.print(" - Enter deposit amount: ");
@@ -52,7 +53,7 @@ public class PortfolioManager {
                         System.out.println(depositAmount + " has been deposited into your account.\n");
 
                         break;
-
+                    // WITHDRAW
                     case 2:
                         System.out.println("");
                         System.out.print(" - Enter withdrawal amount: ");
@@ -69,19 +70,21 @@ public class PortfolioManager {
                         System.out.println("SUCCESS!");
                         System.out.println(withdrawAmount + " has been withdrawn from your account.\n");
                         break;
-
+                    // STOCK - BUY
                     case 3:
                         System.out.println("");
-                        System.out.println(" - choice Three has been made.");
-                        System.out.println("");
+                        System.out.print("");
+
                         break;
 
+                    // STOCK - SELL
                     case 4:
                         System.out.println("");
                         System.out.println(" - choice Four has been made.");
                         System.out.println("");
                         break;
 
+                    // PRINT TRANSACTION HISTORY
                     case 5:
                         System.out.println("");
                         System.out.println("Date\t\tTicker\tQuantity\tCost Basis\tTrans Type");
@@ -91,6 +94,7 @@ public class PortfolioManager {
                         }
                         break;
 
+                    // PRINT PORTFOLIO
                     case 6:
                         System.out.println("");
                         System.out.println(" - choice Six has been made.");
@@ -108,6 +112,8 @@ public class PortfolioManager {
                     System.out.println("");
                     System.out.println("");
             }
+        
+        // EXIT SYSTEM
         } while (userChoice != 0);
 
         scnr.close();
