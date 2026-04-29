@@ -55,8 +55,19 @@ public class PortfolioManager {
 
                     case 2:
                         System.out.println("");
-                        System.out.print(" - choice Two has been made.");
-                        
+                        System.out.print(" - Enter withdrawal amount: ");
+                        double withdrawAmount = Double.parseDouble(scnr.nextLine());
+
+                        TransactionHistory withdraw = new TransactionHistory(
+                            "CASH",
+                            getCurrentDate(),
+                            "WITHDRAW",
+                            withdrawAmount,
+                            1.00
+                        );
+                        portfolioList.add(withdraw);
+                        System.out.println("SUCCESS!");
+                        System.out.println(withdrawAmount + " has been withdrawn from your account.\n");
                         break;
 
                     case 3:

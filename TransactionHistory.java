@@ -25,4 +25,36 @@ public class TransactionHistory {
     public void setTicker(String ticker) {
         this.ticker = ticker;
     }
+
+    public String getTransDate() {
+        return transDate;
+    }
+
+    public void setTransDate(String transDate) {
+        this.transDate = transDate;
+    }
+
+    public String getTransType() {
+        return transType;
+    }
+
+    public void setTransType(String transType) {
+        this.transType = transType;
+    }
+
+    public double getQty() {
+        return qty;
+    }
+
+    public void setQty(double qty) {
+        this.qty = qty;
+    }
+
+    public double getcostBasis() {
+        return costBasis;
+    }
+
+    public void setCostBasis(double costBasis) {
+        this.costBasis = costBasis;
+    }
 }
