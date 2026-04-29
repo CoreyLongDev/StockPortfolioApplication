@@ -8,7 +8,12 @@ import java.util.*;
 // START MAIN CLASS
 public class PortfolioManager {
 
-    private ArrayList<TransactionHistory> portfolioList = new ArrayList<>();
+    private static ArrayList<TransactionHistory> portfolioList = new ArrayList<>();
+
+    private static String getCurrentDate() {
+        java.time.LocalDate today = java.time.LocalDate.now();
+        return today.getMonthValue() + "/" + today.getDayOfMonth() + "/" + today.getYear();
+    }
     public static void main(String[] args) {
 
         Scanner scnr = new Scanner(System.in);
@@ -32,34 +37,52 @@ public class PortfolioManager {
                 switch (userChoice) {
                     case 1:
                         System.out.println("");
-                        System.out.println(" - choice One has been made.");
+                        System.out.println(" - Enter deposit amount: ");
                         System.out.println("");
+                        double depositAmount = Double.parseDouble(scnr.nextLine());
+
+                        TransactionHistory deposit = new TransactionHistory(
+                            "CASH",
+                            getCurrentDate(),
+                            "DEPOSIT",
+                            depositAmount,
+                            1.00
+                        );
+                        portfolioList.add(deposit);
+                        System.out.println("SUCCESS!");
+                        System.out.println(depositAmount + "has been deposited into your account.");
                         break;
+
                     case 2:
                         System.out.println("");
                         System.out.println(" - choice Two has been made.");
                         System.out.println("");
                         break;
+
                     case 3:
                         System.out.println("");
                         System.out.println(" - choice Three has been made.");
                         System.out.println("");
                         break;
+
                     case 4:
                         System.out.println("");
                         System.out.println(" - choice Four has been made.");
                         System.out.println("");
                         break;
+
                     case 5:
                         System.out.println("");
                         System.out.println(" - choice Five has been made.");
                         System.out.println("");
                         break;
+
                     case 6:
                         System.out.println("");
                         System.out.println(" - choice Six has been made.");
                         System.out.println("");
                         break;
+
                     default:
                         System.out.println("");
                         System.out.print(" - Invalid Selection, Please choose an option (0 to 6) : ");
