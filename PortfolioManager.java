@@ -79,8 +79,20 @@ public class PortfolioManager {
                         System.out.print(" - Enter price per share: ");
                         double userSharePrice = Double.parseDouble(scnr.nextLine());
                         System.out.println("");
-                        System.out.print(userTicker + " | " + userQty + " | " + userSharePrice + "\n");
-                        System.out.println("");
+                        double totalCost = userQty * userSharePrice;
+
+                        TransactionHistory stock = new TransactionHistory(
+                            userTicker,
+                            getCurrentDate(),
+                            "BUY",
+                            userQty,
+                            totalCost
+                        );
+                        portfolioList.add(stock);
+                        System.out.println("SUCCESS!");
+                        System.out.println(userQty + " shares of " + userTicker + " have been purchased at $" + userSharePrice + " per share.\n");
+                        System.out.println("Total cost of this transaction: $" + totalCost + "\n");
+
                         break;
 
                     // STOCK - SELL
