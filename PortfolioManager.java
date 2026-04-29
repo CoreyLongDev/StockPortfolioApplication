@@ -70,12 +70,19 @@ public class PortfolioManager {
                         System.out.print(" - Enter withdrawal amount: ");
                         double withdrawAmount = Double.parseDouble(scnr.nextLine());
                         cashBalance = getCashBalance();
-                        // ADD LOGIC FOR CHECKING AVAILABLE FUNDS BEFORE WITHDRAWING
+
+                        // CHECK FUNDS AVAILABILITY
+                        if (cashBalance < withdrawAmount) {
+                            System.out.println("ERROR: Insufficient funds to complete this transaction.");
+                            System.out.println("Transaction cancelled.\n");
+                            break;
+                        }
+
                         TransactionHistory withdraw = new TransactionHistory(
                             "CASH",
                             getCurrentDate(),
                             "WITHDRAW",
-                            withdrawAmount,
+                            -withdrawAmount,
                             1.00
                         );
                         portfolioList.add(withdraw);
