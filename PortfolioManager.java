@@ -10,6 +10,16 @@ public class PortfolioManager {
 
     private static ArrayList<TransactionHistory> portfolioList = new ArrayList<>();
 
+    private static double getCashBalance() {
+        double balance = 0.00;
+        for (TransactionHistory t : portfolioList) {
+            if (t.getTicker().equals("CASH")) {
+                balance += t.getQty();
+            }
+        }
+        return balance;
+    }
+
     private static String getCurrentDate() {
         java.time.LocalDate today = java.time.LocalDate.now();
         return today.getMonthValue() + "/" + today.getDayOfMonth() + "/" + today.getYear();
@@ -18,6 +28,7 @@ public class PortfolioManager {
 
         Scanner scnr = new Scanner(System.in);
         int userChoice = -1;
+        double cashBalance;
 
         // MENU SYSTEM
         do { 
@@ -58,7 +69,8 @@ public class PortfolioManager {
                         System.out.println("");
                         System.out.print(" - Enter withdrawal amount: ");
                         double withdrawAmount = Double.parseDouble(scnr.nextLine());
-
+                        cashBalance = getCashBalance();
+                        // ADD LOGIC FOR CHECKING AVAILABLE FUNDS BEFORE WITHDRAWING
                         TransactionHistory withdraw = new TransactionHistory(
                             "CASH",
                             getCurrentDate(),
@@ -80,7 +92,15 @@ public class PortfolioManager {
                         double userSharePrice = Double.parseDouble(scnr.nextLine());
                         System.out.println("");
                         double totalCost = userQty * userSharePrice;
+                        cashBalance = getCashBalance();
 
+                        // CHECK FUNDS AVAILABILITY
+                        if (cashBalance < totalCost) {
+                            System.out.println("ERROR: Insufficient funds to complete this transaction.");
+                            System.out.println("Transaction cancelled.\n");
+                            break;
+                        }
+                        // BUY STOCK
                         TransactionHistory stock = new TransactionHistory(
                             userTicker,
                             getCurrentDate(),
@@ -88,7 +108,18 @@ public class PortfolioManager {
                             userQty,
                             totalCost
                         );
+
+                        // SUBTRACT STOCK PRICE FROM CASH BALANCE
                         portfolioList.add(stock);
+                        TransactionHistory cashOut = new TransactionHistory(
+                            "CASH",
+                            getCurrentDate(),
+                            "WITHDRAW",
+                            -totalCost,
+                            1.00
+                        );
+
+                        portfolioList.add(cashOut);
                         System.out.println("SUCCESS!");
                         System.out.println(userQty + " shares of " + userTicker + " have been purchased at $" + userSharePrice + " per share.\n");
                         System.out.println("Total cost of this transaction: $" + totalCost + "\n");
