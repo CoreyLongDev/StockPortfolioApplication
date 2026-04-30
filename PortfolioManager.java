@@ -197,6 +197,10 @@ public class PortfolioManager {
                     // PRINT TRANSACTION HISTORY
                     case 5:
                         System.out.println("");
+                        System.out.println("                   Corey Long Brokerage Account");
+                        System.out.println("                 ================================");
+                        System.out.println("");
+                        System.out.println("");
                         System.out.println("Date\t\tTicker\tQuantity\tCost Basis\tTrans Type");
                         System.out.println("===================================================================");
                         for (TransactionHistory t : portfolioList) {
