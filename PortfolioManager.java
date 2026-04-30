@@ -163,9 +163,16 @@ public class PortfolioManager {
                         double totalSale = userQty * userSharePrice;
                         shareBalance = getStockShare(userTicker);
                         
+                        // CHECK IF USER OWNS ANY SHARES
+                        if (shareBalance <= 0) {
+                            System.out.println("ERROR: No Shares of " + userTicker + " found.");
+                            System.out.println("Transaction cancelled.\n");
+                            break;
+                        }
+
                         // CHECK SHARE AVAILABILITY
                         if (shareBalance < userQty) {
-                            System.out.println("ERROR: Insufficient shares to complete this transaction.");
+                            System.out.println("ERROR: Not enough shares to complete this transaction.");
                             System.out.println("Transaction cancelled.\n");
                             break;
                         }
@@ -188,8 +195,8 @@ public class PortfolioManager {
                             1.00
                         );
                         portfolioList.add(cashIn);
-                        System.out.println("SUCCESS!");
-                        System.out.println(userQty + " shares of " + userTicker + " have been sold at $" + userSharePrice + " per share.\n");
+                        System.out.println("SOLD!");
+                        System.out.println(userQty + " shares of " + userTicker + " have been sold at $" + userSharePrice + " per share.");
                         System.out.println("Total value of this transaction: $" + totalSale + "\n");
 
                         break;
@@ -204,7 +211,7 @@ public class PortfolioManager {
                         System.out.println("Date\t\tTicker\tQuantity\tCost Basis\tTrans Type");
                         System.out.println("===================================================================");
                         for (TransactionHistory t : portfolioList) {
-                            System.out.println("\n" + t.getTransDate() + "\t" + t.getTicker() + "\t" + t.getQty() + "\t\t" + t.getCostBasis() + "\t\t" + t.getTransType());
+                            System.out.println("\n" + t.getTransDate() + "\t" + t.getTicker() + "\t" + t.getQty() + "\t\t$" + t.getCostBasis() + "\t\t" + t.getTransType());
                         }
                         break;
 
