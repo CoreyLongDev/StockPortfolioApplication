@@ -146,7 +146,7 @@ public class PortfolioManager {
 
                         portfolioList.add(cashOut);
                         System.out.println("SUCCESS!");
-                        System.out.println(userQty + " shares of " + userTicker + " have been purchased at $" + userSharePrice + " per share.\n");
+                        System.out.println(userQty + " shares of " + userTicker + " have been purchased at $" + userSharePrice + " per share.");
                         System.out.println("Total cost of this transaction: $" + totalCost + "\n");
 
                         break;
@@ -234,7 +234,7 @@ public class PortfolioManager {
                         System.out.println("Ticker\tQuantity");
                         System.out.println("=================");
                         for (String ticker : TickerCollector) {
-                            System.out.println(ticker + "\t" + getStockShare(ticker));
+                            System.out.printf("%s\t%.2f\n\n", ticker, getStockShare(ticker));
                         }
 
                         break;
