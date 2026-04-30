@@ -9,7 +9,7 @@ import java.util.*;
 public class PortfolioManager {
 
     private static ArrayList<TransactionHistory> portfolioList = new ArrayList<>();
-    static ArrayList<String> TickerCollector = new ArrayList<>();
+    private static ArrayList<String> TickerCollector = new ArrayList<>();
 
     private static double getCashBalance() {
         double balance = 0.00;
@@ -131,7 +131,7 @@ public class PortfolioManager {
                             getCurrentDate(),
                             "BUY",
                             userQty,
-                            totalCost
+                            userSharePrice
                         );
 
                         // SUBTRACT STOCK PRICE FROM CASH BALANCE
@@ -200,23 +200,30 @@ public class PortfolioManager {
                         System.out.println("Date\t\tTicker\tQuantity\tCost Basis\tTrans Type");
                         System.out.println("===================================================================");
                         for (TransactionHistory t : portfolioList) {
-                            System.out.println("\n" + t.getTransDate() + "\t" + t.getTicker() + "\t " + t.getQty() + "\t\t" + t.getCostBasis() + "\t\t" + t.getTransType());
+                            System.out.println("\n" + t.getTransDate() + "\t" + t.getTicker() + "\t" + t.getQty() + "\t\t" + t.getCostBasis() + "\t\t" + t.getTransType());
                         }
                         break;
 
                     // PRINT PORTFOLIO
                     case 6:
+                        
                         // ADD TIME FOR BEHIND JAVA DATE
                         java.time.LocalDateTime time = java.time.LocalDateTime.now();
-
+                        String formatTime = time.getMonthValue() + "/" + time.getDayOfMonth() + "/" + time.getYear() + " " + time.getHour() + ":" + time.getMinute() + ":" + time.getSecond() + "\t";
+                        
                         for (TransactionHistory t : portfolioList) {
                             if (!TickerCollector.contains(t.getTicker())) {
                                 TickerCollector.add(t.getTicker());
                             }     
                         }
-
+                        System.out.println("");
+                        System.out.println("Portfolio as of: " +formatTime);
+                        System.out.println("");
+                        System.out.println("====================================");
+                        System.out.println("Ticker\tQuantity");
+                        System.out.println("=================");
                         for (String ticker : TickerCollector) {
-                            System.out.println(time + ticker + getStockShare(ticker));
+                            System.out.println(ticker + "\t" + getStockShare(ticker));
                         }
 
                         break;
